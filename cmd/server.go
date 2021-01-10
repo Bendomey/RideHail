@@ -5,18 +5,13 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
+	// _ "github.com/joho/godotenv/autoload"
+	_ "github.com/heroku/x/hmetrics/onload"
 )
 
 const defaultPort = "8080"
 
 func main() {
-	// load environmwnt variables in here
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
 	//set port
 	port := os.Getenv("PORT")
 	log.Print(port)
