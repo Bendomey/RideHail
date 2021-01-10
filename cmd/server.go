@@ -19,6 +19,7 @@ func main() {
 
 	//set port
 	port := os.Getenv("PORT")
+	log.Print(port)
 	if port == "" {
 		port = defaultPort
 	}
