@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+
 	log "github.com/Bendomey/RideHail/account/internal/logger"
 	"github.com/Bendomey/RideHail/account/internal/orm"
 	"github.com/Bendomey/RideHail/account/internal/services"
@@ -14,7 +16,12 @@ func main() {
 	}
 
 	//call service
-	services.NewAdminSvc(orm)
+	adminSvc := services.NewAdminSvc(orm)
+	loginRes, err := adminSvc.LoginAdmin(context.TODO(), "domeybenjamin@gmail.com", "akankobateng1")
+	if err != nil {
+		log.Error(err)
+	}
 
+	log.NewLogger().Print(loginRes.Admin.CreatedBy)
 	log.NewLogger().Print("Hello world")
 }

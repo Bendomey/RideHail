@@ -57,7 +57,7 @@ func (orm *ORM) LoginAdmin(ctx context.Context, email string, password string) (
 	var _Admin models.Admin
 
 	//check if email is in db
-	_Result := orm.DB.DB.Where("email = ?", email).First(&_Admin)
+	_Result := orm.DB.DB.Where("email = ?", email).Preload("CreatedBy").Find(&_Admin)
 	if errors.Is(_Result.Error, gorm.ErrRecordNotFound) {
 		return nil, errors.New("AdminNotFound")
 	}
