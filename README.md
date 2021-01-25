@@ -10,7 +10,7 @@ Below is the flow for the development of the ridehailing service. We have 5 micr
 
 - [x] Create Super Admin
 - [x] Create Admin
-- [ ] Login Admin
+- [x] Login Admin
 - [ ] Update Admin
 - [ ] Update Admin Password
 - [ ] Delete Admin
