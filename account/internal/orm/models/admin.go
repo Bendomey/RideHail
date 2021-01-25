@@ -31,7 +31,7 @@ func (admin *Admin) BeforeSave(tx *gorm.DB) (err error) {
 	hashed, err := hashpassword.HashPassword(admin.Password)
 	admin.Password = hashed
 	if err != nil {
-		err = errors.New("CannotHashPassword")
+		err = errors.New("CannotHashAdminPassword")
 	}
 	return
 }
