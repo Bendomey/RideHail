@@ -17,11 +17,13 @@ func main() {
 
 	//call service
 	adminSvc := services.NewAdminSvc(orm)
-	_, svcErr := adminSvc.LoginAdmin(context.TODO(), "domeybenjami@gmail.com", "akankobateng1")
+	fullname := "Domey"
+	phone := "0545526661"
+	a, svcErr := adminSvc.UpdateAdmin(context.TODO(), "ed4b567e-c397-4435-82e5-090d8b4bc58c", &fullname, nil, &phone)
 	if svcErr != nil {
 		log.Error(svcErr)
 	}
 
-	// log.NewLogger().Print(loginRes.Admin.CreatedBy)
+	log.NewLogger().Print(a)
 	log.NewLogger().Print("Hello world")
 }
