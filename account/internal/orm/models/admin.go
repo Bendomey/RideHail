@@ -11,11 +11,13 @@ import (
 // Admin defines a administrators who are to manage the app
 type Admin struct {
 	BaseModelSoftDelete
-	FullName string `gorm:"not null;"`
-	Email    string `gorm:"not null;unique_index:idx_email"`
-	Password string `gorm:"not null;"`
-	Phone    *string
-	Role     string `gorm:"not null;"`
+	FullName    string  `gorm:"not null;"`
+	Email       string  `gorm:"not null;unique"`
+	Password    string  `gorm:"not null;"`
+	Phone       *string `gorm:"unique"`
+	Role        string  `gorm:"not null;"`
+	CreatedByID *string
+	CreatedBy   *Admin
 }
 
 // BeforeSave hook is called before the data is persisted to db
