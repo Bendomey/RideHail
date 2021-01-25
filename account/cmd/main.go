@@ -17,9 +17,7 @@ func main() {
 
 	//call service
 	adminSvc := services.NewAdminSvc(orm)
-	fullname := "Domey"
-	phone := "0545526661"
-	a, svcErr := adminSvc.UpdateAdmin(context.TODO(), "ed4b567e-c397-4435-82e5-090d8b4bc58c", &fullname, nil, &phone)
+	a, svcErr := adminSvc.UpdateAdminPassword(context.TODO(), "bc00463c-c0ff-4560-a16e-ae222423c397", "domeybenjamin", "akankobateng1")
 	if svcErr != nil {
 		log.Error(svcErr)
 	}

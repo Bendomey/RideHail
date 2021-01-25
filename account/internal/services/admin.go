@@ -19,6 +19,7 @@ type AdminService interface {
 	LoginAdmin(ctx context.Context, email string, password string) (*LoginResult, error)
 	UpdateAdminRole(ctx context.Context, adminID string, role string) (bool, error)
 	UpdateAdmin(ctx context.Context, adminID string, fullname *string, email *string, phone *string) (bool, error)
+	UpdateAdminPassword(ctx context.Context, adminID string, oldPassword string, newPassword string) (bool, error)
 }
 
 //ORM gets orm connection
@@ -118,6 +119,26 @@ func (orm *ORM) UpdateAdmin(ctx context.Context, adminID string, fullname *strin
 	if phone != nil {
 		_Admin.Phone = phone
 	}
+	orm.DB.DB.Save(&_Admin)
+	return true, nil
+
+}
+
+// UpdateAdminPassword updates password of an admin
+func (orm *ORM) UpdateAdminPassword(ctx context.Context, adminID string, oldPassword string, newPassword string) (bool, error) {
+	var _Admin models.Admin
+
+	err := orm.DB.DB.First(&_Admin, "id = ?", adminID).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return false, errors.New("AdminNotFound")
+	}
+
+	isSame := validatehash.ValidateCipher(oldPassword, _Admin.Password)
+	if isSame == false {
+		return false, errors.New("OldPasswordIncorrect")
+	}
+
+	_Admin.Password = newPassword
 	orm.DB.DB.Save(&_Admin)
 	return true, nil
 

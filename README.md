@@ -13,7 +13,7 @@ Below is the flow for the development of the ridehailing service. We have 5 micr
 - [x] Login Admin
 - [x] Update Admin Role
 - [x] Update Admin Self
-- [ ] Update Admin Password
+- [x] Update Admin Password
 - [ ] Delete Admin
 - [ ] Forgot Admin Password Functionality
 
