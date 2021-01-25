@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	// _ "github.com/joho/godotenv/autoload"
-	_ "github.com/heroku/x/hmetrics/onload"
+	_ "github.com/joho/godotenv/autoload"
+	// _ "github.com/heroku/x/hmetrics/onload"
 )
 
 const defaultPort = "8080"
