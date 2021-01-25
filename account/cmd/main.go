@@ -17,7 +17,7 @@ func main() {
 
 	//call service
 	adminSvc := services.NewAdminSvc(orm)
-	loginRes, err := adminSvc.LoginAdmin(context.TODO(), "domeybenjamin@gmail.com", "akankobateng1")
+	loginRes, err := adminSvc.LoginAdmin(context.TODO(), "domeybenjami@gmail.com", "akankobateng1")
 	if err != nil {
 		log.Error(err)
 	}
