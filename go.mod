@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/Bendomey/goutilities v0.0.0-20201104205146-d5b8f238bf1b
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.6.3 // indirect
 	github.com/go-gormigrate/gormigrate/v2 v2.0.0
 	github.com/gofrs/uuid v4.0.0+incompatible
