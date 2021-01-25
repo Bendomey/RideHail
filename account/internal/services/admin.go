@@ -17,6 +17,8 @@ import (
 type AdminService interface {
 	CreateAdmin(ctx context.Context, name string, email string, password string, role string, createdBy *string, phone *string) (*models.Admin, error)
 	LoginAdmin(ctx context.Context, email string, password string) (*LoginResult, error)
+	UpdateAdminRole(ctx context.Context, adminID string, role string) (bool, error)
+	UpdateAdmin(ctx context.Context, adminID string, fullname string, email string, phone *string) (bool, error)
 }
 
 //ORM gets orm connection
@@ -82,4 +84,34 @@ func (orm *ORM) LoginAdmin(ctx context.Context, email string, password string) (
 		Token: token,
 		Admin: _Admin,
 	}, nil
+}
+
+// UpdateAdminRole updates role of an admin
+func (orm *ORM) UpdateAdminRole(ctx context.Context, adminID string, role string) (bool, error) {
+	var _Admin models.Admin
+
+	err := orm.DB.DB.First(&_Admin, "id = ?", adminID).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return false, errors.New("AdminNotFound")
+	}
+	_Admin.Role = role
+	orm.DB.DB.Save(&_Admin)
+	return true, nil
+
+}
+
+// UpdateAdmin updates data of an admin
+func (orm *ORM) UpdateAdmin(ctx context.Context, adminID string, fullname string, email string, phone *string) (bool, error) {
+	var _Admin models.Admin
+
+	err := orm.DB.DB.First(&_Admin, "id = ?", adminID).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return false, errors.New("AdminNotFound")
+	}
+	_Admin.FullName = fullname
+	_Admin.Email = email
+	_Admin.Phone = phone
+	orm.DB.DB.Save(&_Admin)
+	return true, nil
+
 }
