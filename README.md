@@ -1,6 +1,6 @@
 # RideHail
 
-Ride Hailing Service tryouts with golang, gorm, postgres, redis, gin 🔥
+Ride Hailing Service tryouts with golang, gorm, postgres, redis, gin, uber h3 🔥
 
 # Services Development
 
