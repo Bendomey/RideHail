@@ -14,7 +14,7 @@ type Rider struct {
 	BaseModelSoftDelete
 	LastName     string `gorm:"not null;"`
 	OtherNames   string `gorm:"not null;"`
-	Email        string `gorm:"not null;unique_index:idx_email"`
+	Email        string `gorm:"not null;unique"`
 	Phone        string `gorm:"not null;unique"`
 	Password     string `gorm:"not null;"`
 	AuthorisedAt *time.Time

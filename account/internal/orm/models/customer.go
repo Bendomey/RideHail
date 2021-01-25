@@ -11,8 +11,8 @@ type Customer struct {
 	BaseModelSoftDelete
 	LastName   string `gorm:"not null;"`
 	OtherNames *string
-	Email      *string
-	Phone      string `gorm:"not null;"`
+	Email      *string `gorm:"unique"`
+	Phone      string  `gorm:"not null;unique"`
 }
 
 // BeforeSave hook is called before the data is persisted to db
