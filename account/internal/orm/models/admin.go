@@ -37,3 +37,11 @@ func (admin *Admin) BeforeSave(tx *gorm.DB) (err error) {
 	}
 	return
 }
+
+// BeforeDelete hook is called before the data is delete so that we dont delete super admin
+func (admin *Admin) BeforeDelete(tx *gorm.DB) (err error) {
+	if admin.CreatedByID == nil {
+		err = errors.New("CannotDeleteSuperAdmin")
+	}
+	return
+}
