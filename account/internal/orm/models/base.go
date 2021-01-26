@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/gofrs/uuid"
+	"gorm.io/gorm"
 )
 
 // BaseModel defines the common columns that all db structs should hold, usually
@@ -20,5 +21,5 @@ type BaseModel struct {
 // detect the entity should soft delete
 type BaseModelSoftDelete struct {
 	BaseModel
-	DeletedAt *time.Time `sql:"index"`
+	DeletedAt gorm.DeletedAt
 }
