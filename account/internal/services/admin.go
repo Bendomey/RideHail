@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/Bendomey/RideHail/account/internal/mail"
 	"github.com/Bendomey/RideHail/account/internal/orm"
 	"github.com/Bendomey/RideHail/account/internal/orm/models"
 	"github.com/Bendomey/RideHail/account/pkg/utils"
@@ -182,12 +183,16 @@ func (orm *ORM) ForgotPasswordRequest(ctx context.Context, email string) (*model
 	//generate code
 	code := generatecode.GenerateCode(6)
 
-	// send code to email
-
 	//save in redis and expire in an hours time
 	redisErr := orm.rdb.Set(ctx, fmt.Sprintf("%s", _Admin.ID), code, 1*time.Hour).Err()
 	if redisErr != nil {
 		return nil, redisErr
+	}
+
+	// send code to email
+	mailErr := mail.SendMail(_Admin.Email, fmt.Sprintf("Your code is %s", code))
+	if mailErr != nil {
+		return nil, mailErr
 	}
 
 	return &_Admin, nil
@@ -206,12 +211,16 @@ func (orm *ORM) ResendCode(ctx context.Context, adminID string) (*models.Admin, 
 	//generate code
 	code := generatecode.GenerateCode(6)
 
-	// send code to email
-
 	//save in redis and expire in an hours time
 	redisErr := orm.rdb.Set(ctx, fmt.Sprintf("%s", _Admin.ID), code, 1*time.Hour).Err()
 	if redisErr != nil {
 		return nil, redisErr
+	}
+
+	// send code to email
+	mailErr := mail.SendMail(_Admin.Email, fmt.Sprintf("Your code is %s", code))
+	if mailErr != nil {
+		return nil, mailErr
 	}
 
 	return &_Admin, nil
