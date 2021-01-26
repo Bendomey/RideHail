@@ -18,10 +18,11 @@ func main() {
 
 	//call service
 	services.NewAdminSvc(orm, rdb)
-	// a, svcErr := adminSvc.DeleteAdmin(context.TODO(), "cef24503-83b4-45d6-af45-ca4fb9ac885f")
+	// a, svcErr := adminSvc.ResetPassword(context.TODO(), "bc00463c-c0ff-4560-a16e-ae222423c397", "akankobateng1")
 	// if svcErr != nil {
 	// 	log.Error(svcErr)
 	// }
 
+	// log.NewLogger().Print(a)
 	log.NewLogger().Print("Hello world")
 }

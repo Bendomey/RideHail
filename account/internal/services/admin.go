@@ -26,6 +26,10 @@ type AdminService interface {
 	UpdateAdmin(ctx context.Context, adminID string, fullname *string, email *string, phone *string) (bool, error)
 	UpdateAdminPassword(ctx context.Context, adminID string, oldPassword string, newPassword string) (bool, error)
 	DeleteAdmin(ctx context.Context, adminID string) (bool, error)
+	ForgotPasswordRequest(ctx context.Context, email string) (*models.Admin, error)
+	ResendCode(ctx context.Context, adminID string) (*models.Admin, error)
+	CompareAdminCodes(ctx context.Context, adminID string, code string) (bool, error)
+	ResetPassword(ctx context.Context, adminID string, password string) (bool, error)
 }
 
 //ORM gets orm connection
@@ -256,6 +260,9 @@ func (orm *ORM) ResetPassword(ctx context.Context, adminID string, password stri
 	orm.DB.DB.Save(&_Admin)
 
 	//invalidate the redis data pertaining to this admin
-
+	redisErr := orm.rdb.Set(ctx, fmt.Sprintf("%s", adminID), nil, 1*time.Second).Err()
+	if redisErr != nil {
+		return false, redisErr
+	}
 	return true, nil
 }
