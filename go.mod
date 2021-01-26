@@ -7,6 +7,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.6.3 // indirect
 	github.com/go-gormigrate/gormigrate/v2 v2.0.0
+	github.com/go-redis/redis/v8 v8.4.10
 	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/heroku/x v0.0.26
 	github.com/joho/godotenv v1.3.0
